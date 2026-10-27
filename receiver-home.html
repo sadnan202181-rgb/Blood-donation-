@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Search - Blood Connect</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff1f2;
+      color: #333;
+    }
+
+    header {
+      background: #dc2626;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 450px;
+      margin: 25px auto;
+      padding: 22px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 18px #00000012;
+    }
+
+    h2 {
+      color: #c62828;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 17px 0 7px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #dc2626;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding: 13px;
+      background: #fff1f2;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #result {
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🩸 Blood Connect</h1>
+    <p>রক্ত খুঁজুন, জীবন বাঁচান</p>
+  </header>
+
+  <main class="container">
+    <h2>Find Blood Donor</h2>
+    <p>আপনার প্রয়োজনীয় রক্তের গ্রুপ ও অবস্থান নির্বাচন করুন।</p>
+
+    <form id="searchForm">
+
+      <label for="bloodGroup">Blood Group / রক্তের গ্রুপ</label>
+      <select id="bloodGroup" required>
+        <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
+        <option value="A+">A Positive (A+)</option>
+        <option value="A-">A Negative (A-)</option>
+        <option value="B+">B Positive (B+)</option>
+        <option value="B-">B Negative (B-)</option>
+        <option value="AB+">AB Positive (AB+)</option>
+        <option value="AB-">AB Negative (AB-)</option>
+        <option value="O+">O Positive (O+)</option>
+        <option value="O-">O Negative (O-)</option>
+      </select>
+
+      <label for="district">District / জেলা</label>
+      <select id="district" required>
+        <option value="">জেলা নির্বাচন করুন</option>
+        <option>Dhaka</option>
+      </select>
+
+      <label for="thana">Thana / থানা</label>
+      <select id="thana" required>
+        <option value="">থানা নির্বাচন করুন</option>
+        <option>Sabujbagh</option>
+        <option>Khilgone</option>
+        <option>Mugda</option>
+        <option>Motijheel</option>
+        <option>Jatrabari</option>    
+          <option>Polton</option>
+        <option>Gulistan</option>
+      </select>
+
+      <button type="submit">🔍 Search Blood</button>
+    </form>
+
+    <div id="result" aria-live="polite"></div>
+
+    <div class="info">
+      <strong>নোট:</strong> এখানে এখনো বাস্তব Donor Database যুক্ত করা হয়নি।
+      প্রকৃত রক্তদাতার তথ্য দেখাতে Backend যুক্ত করতে হবে।
+    </div>
+  </main>
+
+  <script>
+document.getElementById("searchForm")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const group = document.getElementById("bloodGroup").value;
+    const district = document.getElementById("district").value;
+    const upazila = document.getElementById("thana").value;
+
+    const params = new URLSearchParams();
+    params.set("blood", group);
+    params.set("district", district);
+    params.set("thana", thana);
+
+    window.location.href =
+      "donor-list.html?" + params.toString();
+  });
+</script>
+</body>
+</html>
+</body>
+</html>

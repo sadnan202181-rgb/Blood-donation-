@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Donor List</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 16px;
+}
+h2 {
+  color: #c62828;
+  text-align: center;
+}
+.donor {
+  background: white;
+  padding: 16px;
+  margin: 14px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #ddd;
+}
+.donor h3 {
+  color: #b91c1c;
+  margin-top: 0;
+}
+p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+button {
+  background: #c62828;
+  color: white;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🩸 Available Blood Donors</h2>
+<p id="searchInfo">নমুনা রক্তদাতাদের তালিকা</p>
+
+<div id="donorList"></div>
+<script>
+const donors = [
+  {
+    name: "Demo Donor 1",
+    age: 25,
+    blood: "A+",
+    lastDate: "2026-06-10",
+    district: "Khulna",
+    upazila: "Paikgachha",
+    address: "Paikgachha, Khulna, Bangladesh",
+    phone: "01700000001"
+  },
+  {
+    name: "Demo Donor 2",
+    age: 30,
+    blood: "B+",
+    lastDate: "2026-05-15",
+    district: "Khulna",
+    upazila: "Khulna Sadar",
+    address: "Khulna Sadar, Khulna, Bangladesh",
+    phone: "01700000002"
+  },
+  {
+    name: "Demo Donor 3",
+    age: 22,
+    blood: "O+",
+    lastDate: "2026-07-20",
+    district: "Jashore",
+    upazila: "Sadar",
+    address: "Jashore Sadar, Bangladesh",
+    phone: "01700000003"
+  },
+  {
+    name: "Demo Donor 4",
+    age: 28,
+    blood: "A+",
+    lastDate: "2026-04-12",
+    district: "Satkhira",
+    upazila: "Kaliganj",
+    address: "Kaliganj, Satkhira, Bangladesh",
+    phone: "01700000004"
+  }
+];
+
+const params = new URLSearchParams(location.search);
+const blood = params.get("blood") || "";
+const district = params.get("district") || "";
+const upazila = params.get("upazila") || "";
+
+document.getElementById("searchInfo").textContent =
+  "Blood Group: " + blood +
+  " | District: " + district +
+  " | Upazila: " + upazila;
+
+const filtered = donors.filter(d =>
+  d.blood === blood &&
+  d.district.toLowerCase() === district.toLowerCase() &&
+  d.upazila.toLowerCase() === upazila.toLowerCase()
+);
+
+const list = document.getElementById("donorList");
+list.innerHTML = "";
+
+if (filtered.length === 0) {
+  list.textContent =
+    "এই Search-এর জন্য কোনো Demo Donor পাওয়া যায়নি।";
+}
+
+filtered.forEach(d => {
+  const card = document.createElement("div");
+  card.className = "donor";
+
+  const title = document.createElement("h3");
+  title.textContent = d.name;
+  card.appendChild(title);
+
+  [
+    "বয়স: " + d.age + " বছর",
+    "Blood Group: " + d.blood,
+    "সর্বশেষ রক্তদান: " + d.lastDate,
+    "ঠিকানা: " + d.address,
+    "ফোন: " + d.phone
+  ].forEach(info => {
+    const p = document.createElement("p");
+    p.textContent = info;
+    card.appendChild(p);
+  });
+
+  list.appendChild(card);
+});
+</script>
+</body>
+</html>
+    
+</body>
+</html>
